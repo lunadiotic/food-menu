@@ -24,14 +24,19 @@ function Header() {
 }
 
 function Menu() {
+  // const foods = [];
+  const foods = data;
+  const numFoods = foods.length;
   return (
     <main className="menu">
       <h2>Menu Kita</h2>
-      <ul className="foods">
-        {data.map((food) => (
-          <Food foodObj={food} key={food.nama} />
-        ))}
-      </ul>
+      {numFoods > 0 && (
+        <ul className="foods">
+          {data.map((food) => (
+            <Food foodObj={food} key={food.nama} />
+          ))}
+        </ul>
+      )}
       {/* <Food
         nama="Nasi Goreng"
         deskripsi="Nasi yang digoreng dengan bumbu rempah khas Indonesia"
@@ -52,19 +57,21 @@ function Menu() {
 
 function Footer() {
   const hour = new Date().getHours();
-  const jamBuka = 12;
+  const jamBuka = 0;
   const jamTutup = 22;
-
-  if (hour < jamBuka || hour > jamTutup) {
-    alert("Warteg Mang Udin Tutup");
-  } else {
-    alert("Warteg Mang Udin Buka");
-  }
+  const isOpen = hour >= jamBuka && hour <= jamTutup;
 
   return (
     <footer className="footer">
-      {new Date().getFullYear()} Warung Mang Udin | jam buka {jamBuka} - jam
-      tutup {jamTutup}
+      {isOpen && (
+        <div className="order">
+          <p>
+            {new Date().getFullYear()} Warung Mang Udin | jam buka {jamBuka} -
+            jam tutup {jamTutup}
+          </p>
+          <button className="btn">Order</button>
+        </div>
+      )}
     </footer>
   );
 }
