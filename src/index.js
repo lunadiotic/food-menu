@@ -49,9 +49,9 @@ function Footer() {
   const jamTutup = 22;
   const isOpen = hour >= jamBuka && hour <= jamTutup;
 
-  return (
-    <footer className="footer">
-      {isOpen ? (
+  if (isOpen) {
+    return (
+      <footer className="footer">
         <div className="order">
           <p>
             {new Date().getFullYear()} Warung Mang Udin | jam buka {jamBuka} -
@@ -59,14 +59,18 @@ function Footer() {
           </p>
           <button className="btn">Order</button>
         </div>
-      ) : (
+      </footer>
+    );
+  } else {
+    return (
+      <footer className="footer">
         <p>
           Maaf gan masih tutup. Coba dateng lagi sekitar jam {jamBuka}-
           {jamTutup}.
         </p>
-      )}
-    </footer>
-  );
+      </footer>
+    );
+  }
 }
 
 function Food(props) {
