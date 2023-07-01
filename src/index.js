@@ -24,46 +24,34 @@ function Header() {
 }
 
 function Menu() {
-  // const foods = [];
-  const foods = data;
+  const foods = [];
+  // const foods = data;
   const numFoods = foods.length;
   return (
     <main className="menu">
       <h2>Menu Kita</h2>
-      {numFoods > 0 && (
+      {numFoods > 0 ? (
         <ul className="foods">
           {data.map((food) => (
             <Food foodObj={food} key={food.nama} />
           ))}
         </ul>
+      ) : (
+        <p>Kosong, gan. Besok dateng lagi.</p>
       )}
-      {/* <Food
-        nama="Nasi Goreng"
-        deskripsi="Nasi yang digoreng dengan bumbu rempah khas Indonesia"
-        harga={25000}
-        foto="food/nasi-goreng.jpg"
-        stok={Math.random() >= 0.5 ? true : false}
-      />
-      <Food
-        nama="Sate Ayam"
-        deskripsi="Sate ayam yang ditusuk dan dibakar, disajikan dengan bumbu kacang"
-        harga={15000}
-        foto="food/sate-ayam.jpg"
-        stok={Math.random() >= 0.5 ? true : false}
-      /> */}
     </main>
   );
 }
 
 function Footer() {
   const hour = new Date().getHours();
-  const jamBuka = 0;
+  const jamBuka = 20;
   const jamTutup = 22;
   const isOpen = hour >= jamBuka && hour <= jamTutup;
 
   return (
     <footer className="footer">
-      {isOpen && (
+      {isOpen ? (
         <div className="order">
           <p>
             {new Date().getFullYear()} Warung Mang Udin | jam buka {jamBuka} -
@@ -71,6 +59,11 @@ function Footer() {
           </p>
           <button className="btn">Order</button>
         </div>
+      ) : (
+        <p>
+          Maaf gan masih tutup. Coba dateng lagi sekitar jam {jamBuka}-
+          {jamTutup}.
+        </p>
       )}
     </footer>
   );
