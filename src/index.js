@@ -24,8 +24,8 @@ function Header() {
 }
 
 function Menu() {
-  const foods = [];
-  // const foods = data;
+  // const foods = [];
+  const foods = data;
   const numFoods = foods.length;
   return (
     <main className="menu">
@@ -45,7 +45,7 @@ function Menu() {
 
 function Footer() {
   const hour = new Date().getHours();
-  const jamBuka = 12;
+  const jamBuka = 20;
   const jamTutup = 22;
   const isOpen = hour >= jamBuka && hour <= jamTutup;
 
@@ -56,13 +56,13 @@ function Footer() {
   }
 }
 
-function FooterOpenHour(props) {
+function FooterOpenHour({ jamBuka, jamTutup }) {
   return (
     <footer className="footer">
       <div className="order">
         <p>
-          {new Date().getFullYear()} Warung Mang Udin | jam buka {props.jamBuka}{" "}
-          - jam tutup {props.jamTutup}
+          {new Date().getFullYear()} Warung Mang Udin | jam buka {jamBuka} - jam
+          tutup {jamTutup}
         </p>
         <button className="btn">Order</button>
       </div>
@@ -70,30 +70,25 @@ function FooterOpenHour(props) {
   );
 }
 
-function FooterClosedHour(props) {
+function FooterClosedHour({ jamBuka, jamTutup }) {
   return (
     <footer className="footer">
       <p>
-        Maaf gan masih tutup. Coba dateng lagi sekitar jam {props.jamBuka}-
-        {props.jamTutup}.
+        Maaf gan masih tutup. Coba dateng lagi sekitar jam {jamBuka}-{jamTutup}.
       </p>
     </footer>
   );
 }
 
 function Food(props) {
+  const { nama, deskripsi, harga, foto, stok } = props.foodObj;
   return (
     <li className="food">
-      <img
-        src={props.foodObj.foto}
-        alt={props.foodObj.nama}
-        width="100"
-        height="70"
-      />
+      <img src={foto} alt={nama} width="100" height="70" />
       <div>
-        <h3>{props.foodObj.nama}</h3>
-        <p>{props.foodObj.deskripsi}</p>
-        <span>{props.foodObj.harga}</span>
+        <h3>{nama}</h3>
+        <p>{deskripsi}</p>
+        <span>{harga}</span>
       </div>
     </li>
   );
