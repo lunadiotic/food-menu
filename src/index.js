@@ -45,32 +45,40 @@ function Menu() {
 
 function Footer() {
   const hour = new Date().getHours();
-  const jamBuka = 20;
+  const jamBuka = 12;
   const jamTutup = 22;
   const isOpen = hour >= jamBuka && hour <= jamTutup;
 
   if (isOpen) {
-    return (
-      <footer className="footer">
-        <div className="order">
-          <p>
-            {new Date().getFullYear()} Warung Mang Udin | jam buka {jamBuka} -
-            jam tutup {jamTutup}
-          </p>
-          <button className="btn">Order</button>
-        </div>
-      </footer>
-    );
+    return <FooterOpenHour jamBuka={jamBuka} jamTutup={jamTutup} />;
   } else {
-    return (
-      <footer className="footer">
-        <p>
-          Maaf gan masih tutup. Coba dateng lagi sekitar jam {jamBuka}-
-          {jamTutup}.
-        </p>
-      </footer>
-    );
+    return <FooterClosedHour jamBuka={jamBuka} jamTutup={jamTutup} />;
   }
+}
+
+function FooterOpenHour(props) {
+  return (
+    <footer className="footer">
+      <div className="order">
+        <p>
+          {new Date().getFullYear()} Warung Mang Udin | jam buka {props.jamBuka}{" "}
+          - jam tutup {props.jamTutup}
+        </p>
+        <button className="btn">Order</button>
+      </div>
+    </footer>
+  );
+}
+
+function FooterClosedHour(props) {
+  return (
+    <footer className="footer">
+      <p>
+        Maaf gan masih tutup. Coba dateng lagi sekitar jam {props.jamBuka}-
+        {props.jamTutup}.
+      </p>
+    </footer>
+  );
 }
 
 function Food(props) {
